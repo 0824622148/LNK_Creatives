@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whipped Body Butter — LNK Creatives</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --teal:         #2ba8ad;
+      --teal-dark:    #1f8e92;
+      --teal-hover:   #25949a;
+      --cream:        #fdfbf6;
+      --beige:        #f7f2e8;
+      --border:       #ece4d6;
+      --text:         #2b2b26;
+      --text-mid:     #3d3a33;
+      --text-muted:   #5d574c;
+      --text-light:   #8b8475;
+      --gold:         #ffd27a;
+      --placeholder:  #eee6d5;
+    }
+
+    /* ── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; color: var(--text); background: #fff; overflow-x: hidden; }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: inherit; }
+    ::selection { background: var(--teal); color: #fff; }
+
+    /* ── SHARED BUTTON ──────────────────────────────────── */
+    .btn {
+      display: inline-block;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      padding: 13px 30px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 600;
+      border-radius: 3px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn:hover { background: var(--teal-dark); }
+    .btn:active { transform: scale(0.98); }
+
+    /* ── ANNOUNCEMENT BAR ───────────────────────────────── */
+    .announcement {
+      background: var(--teal-dark);
+      color: #fff;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 2.5px;
+      padding: 9px 16px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    /* ── NAVIGATION ─────────────────────────────────────── */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 56px;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo { height: 62px; width: auto; }
+    .nav-links {
+      display: flex;
+      gap: 34px;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      color: var(--text-mid);
+    }
+    .nav-links a { transition: color 0.2s; }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--teal); }
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      color: var(--text-mid);
+    }
+    .nav-icons .icon-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    .nav-icons .icon-btn:hover { color: var(--teal); }
+    .cart-wrap { position: relative; }
+    .cart-badge {
+      position: absolute;
+      top: -7px;
+      right: -9px;
+      background: var(--teal);
+      color: #fff;
+      font-size: 9px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text-mid);
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    /* ── MOBILE DRAWER ──────────────────────────────────── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      z-index: 200;
+      flex-direction: column;
+      padding: 28px 28px 40px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 36px;
+    }
+    .mobile-nav-logo { height: 52px; }
+    .mobile-close {
+      background: none;
+      border: none;
+      font-size: 32px;
+      color: var(--text-mid);
+      line-height: 1;
+      cursor: pointer;
+    }
+    .mobile-nav a {
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--text-mid);
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    .mobile-nav a:last-child { border-bottom: none; }
+    .mobile-nav a:hover { color: var(--teal); }
+
+    /* ── BREADCRUMB ─────────────────────────────────────── */
+    .breadcrumb {
+      padding: 16px 56px;
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      font-size: 11px;
+      color: var(--text-light);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .breadcrumb a { color: var(--text-light); transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--teal); }
+    .breadcrumb .sep { opacity: 0.5; }
+    .breadcrumb .current { color: var(--text-muted); font-weight: 600; }
+
+    /* ── PRODUCT SECTION ────────────────────────────────── */
+    .product-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      padding: 56px 56px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    /* Gallery */
+    .product-gallery { display: flex; flex-direction: column; gap: 14px; }
+    .gallery-main {
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--beige);
+      aspect-ratio: 1;
+    }
+    .gallery-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .gallery-main:hover img { transform: scale(1.04); }
+    .gallery-thumbs {
+      display: flex;
+      gap: 12px;
+    }
+    .thumb {
+      width: 78px;
+      height: 78px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+      background: var(--beige);
+      transition: border-color 0.2s;
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .thumb.active { border-color: var(--teal); }
+    .thumb:hover { border-color: var(--teal-hover); }
+
+    /* Product Info */
+    .product-info { padding-top: 4px; }
+    .product-badge {
+      display: inline-block;
+      background: var(--teal);
+      color: #fff;
+      font-size: 9px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-bottom: 14px;
+    }
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 38px;
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .product-tagline {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: var(--teal);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .stars { color: var(--gold); font-size: 16px; letter-spacing: 2px; }
+    .rating-count { font-size: 11px; color: var(--text-light); }
+    .rating-count a { color: var(--teal); border-bottom: 1px solid rgba(43,168,173,.35); transition: border-color 0.2s; }
+    .rating-count a:hover { border-color: var(--teal); }
+
+    .product-price {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+    .product-compare {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 22px;
+    }
+    .product-compare s { opacity: 0.6; }
+    .product-compare .save-tag {
+      background: #f0f9fa;
+      color: var(--teal-dark);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 2px 8px;
+      border-radius: 2px;
+      margin-left: 8px;
+    }
+
+    .product-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 22px 0;
+    }
+
+    .product-desc {
+      font-size: 13px;
+      line-height: 1.85;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    /* Size selector */
+    .selector-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+      color: var(--text-mid);
+    }
+    .size-options {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .size-btn {
+      padding: 9px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      background: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-mid);
+      letter-spacing: 0.5px;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+    }
+    .size-btn:hover { border-color: var(--teal); color: var(--teal); }
+    .size-btn.active {
+      border-color: var(--teal);
+      background: var(--teal);
+      color: #fff;
+    }
+
+    /* Scent selector */
+    .scent-options {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .scent-btn {
+      padding: 8px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      background: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-mid);
+      letter-spacing: 0.5px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .scent-btn:hover { border-color: var(--teal); color: var(--teal); }
+    .scent-btn.active { border-color: var(--teal); color: var(--teal); background: #f0f9fa; }
+
+    /* Quantity + Add to Cart */
+    .add-to-cart-row {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+      align-items: stretch;
+    }
+    .qty-control {
+      display: flex;
+      align-items: center;
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .qty-btn {
+      width: 40px;
+      height: 100%;
+      background: var(--cream);
+      border: none;
+      font-size: 18px;
+      color: var(--text-mid);
+      transition: background 0.2s;
+      padding: 0;
+    }
+    .qty-btn:hover { background: var(--beige); }
+    .qty-input {
+      width: 48px;
+      text-align: center;
+      border: none;
+      border-left: 1.5px solid var(--border);
+      border-right: 1.5px solid var(--border);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+      outline: none;
+      padding: 0;
+    }
+    .btn-add-cart {
+      flex: 1;
+      padding: 14px 24px;
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-add-cart:hover { background: var(--teal-dark); }
+    .btn-add-cart:active { transform: scale(0.98); }
+
+    .btn-wishlist {
+      width: 100%;
+      padding: 12px;
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 3px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      color: var(--text-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-wishlist:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* Trust badges */
+    .trust-badges {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+    .trust-icon {
+      width: 28px;
+      height: 28px;
+      border: 1.2px solid var(--teal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--teal);
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    /* ── PRODUCT TABS ───────────────────────────────────── */
+    .product-tabs-section {
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0 56px;
+    }
+    .tabs-nav {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      max-width: 1088px;
+      margin: 0 auto;
+    }
+    .tab-btn {
+      padding: 20px 32px;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      color: var(--text-light);
+      transition: color 0.2s, border-color 0.2s;
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--text-mid); }
+    .tab-btn.active { color: var(--teal); border-bottom-color: var(--teal); }
+
+    .tabs-content {
+      max-width: 1088px;
+      margin: 0 auto;
+      padding: 40px 0 56px;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .tab-panel h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    .tab-panel p {
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      max-width: 680px;
+    }
+    .tab-panel ul {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+    .tab-panel ul li {
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--text-muted);
+      padding-left: 18px;
+      position: relative;
+      max-width: 680px;
+    }
+    .tab-panel ul li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--teal);
+      font-size: 8px;
+      top: 6px;
+    }
+
+    /* Steps (How to Use) */
+    .steps { display: flex; flex-direction: column; gap: 20px; max-width: 560px; }
+    .step {
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: var(--teal);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-text .step-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      color: var(--text-mid);
+    }
+    .step-text .step-desc {
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    /* Reviews */
+    .reviews-summary {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-bottom: 36px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rating-big {
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .rating-big .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1;
+    }
+    .rating-big .stars-big { color: var(--gold); font-size: 18px; letter-spacing: 3px; margin: 6px 0; }
+    .rating-big .total { font-size: 10px; color: var(--text-light); }
+    .rating-bars { flex: 1; max-width: 360px; }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 7px;
+    }
+    .bar-label { font-size: 10px; color: var(--text-light); white-space: nowrap; }
+    .bar-track {
+      flex: 1;
+      height: 6px;
+      background: var(--border);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 3px;
+    }
+    .bar-count { font-size: 10px; color: var(--text-light); }
+
+    .review-cards { display: flex; flex-direction: column; gap: 28px; }
+    .review-card {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      max-width: 680px;
+    }
+    .review-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .reviewer-name { font-size: 12px; font-weight: 700; color: var(--text); }
+    .review-date { font-size: 10px; color: var(--text-light); }
+    .review-stars { color: var(--gold); font-size: 13px; letter-spacing: 2px; margin-bottom: 10px; }
+    .review-text { font-size: 13px; line-height: 1.75; color: var(--text-muted); }
+    .verified-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--teal-dark);
+      background: #e6f6f6;
+      padding: 2px 8px;
+      border-radius: 2px;
+      margin-top: 10px;
+    }
+
+    /* ── RELATED PRODUCTS ───────────────────────────────── */
+    .related {
+      padding: 64px 56px;
+      background: #fff;
+      text-align: center;
+    }
+    .related h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 500;
+      margin-bottom: 38px;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .prod-card { text-align: left; cursor: pointer; }
+    .prod-img {
+      height: 224px;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 13px;
+      transition: box-shadow 0.25s;
+    }
+    .prod-card:hover .prod-img { box-shadow: 0 10px 32px rgba(0,0,0,.13); }
+    .prod-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .prod-card:hover .prod-img img { transform: scale(1.05); }
+    .prod-name { font-size: 13px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+    .prod-price { font-size: 13px; color: var(--teal); font-weight: 700; margin-bottom: 12px; }
+    .prod-btn {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+    }
+
+    /* ── PROMISE STRIP ──────────────────────────────────── */
+    .promises {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--teal-dark);
+      color: #fff;
+      padding: 36px 56px;
+      gap: 24px;
+    }
+    .promise-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: center;
+    }
+    .promise-icon { font-size: 22px; flex-shrink: 0; }
+    .promise-title { font-size: 11px; font-weight: 700; letter-spacing: 1px; line-height: 1.3; }
+    .promise-sub { font-size: 10px; opacity: 0.85; }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--teal-dark);
+      color: #fff;
+      padding: 60px 56px 28px;
+      margin-top: 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr 1.2fr;
+      gap: 32px;
+      padding-bottom: 38px;
+      border-bottom: 1px solid rgba(255,255,255,.18);
+    }
+    .footer-logo { display: block; }
+    .footer-col-head { font-size: 11px; font-weight: 700; letter-spacing: 2px; margin-bottom: 16px; }
+    .footer-col a,
+    .footer-col .flink {
+      display: block;
+      font-size: 11px;
+      opacity: 0.82;
+      margin-bottom: 10px;
+      transition: opacity 0.2s;
+    }
+    .footer-col a:hover { opacity: 1; }
+    .socials { display: flex; gap: 10px; margin-bottom: 16px; }
+    .social-icon {
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .social-icon:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.8); }
+    .footer-bottom {
+      text-align: center;
+      font-size: 10px;
+      opacity: 0.65;
+      padding-top: 24px;
+    }
+
+    /* ── TOAST NOTIFICATION ─────────────────────────────── */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--teal-dark);
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 28px rgba(0,0,0,.18);
+      z-index: 999;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ── TABLET ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .nav, .breadcrumb, .product-tabs-section,
+      .related, .promises, footer { padding-left: 32px; padding-right: 32px; }
+      .product-section { padding: 40px 32px; gap: 40px; }
+    }
+
+    /* ── MOBILE ─────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav { padding: 10px 20px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .breadcrumb { padding: 12px 20px; }
+
+      .product-section {
+        grid-template-columns: 1fr;
+        padding: 28px 20px;
+        gap: 28px;
+      }
+      .gallery-main { aspect-ratio: 4/3; }
+      .thumb { width: 60px; height: 60px; }
+
+      .product-name { font-size: 28px; }
+
+      .product-tabs-section { padding: 0 20px; }
+      .tabs-nav { overflow-x: auto; }
+      .tab-btn { padding: 16px 20px; white-space: nowrap; }
+
+      .related { padding: 44px 20px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .promises { grid-template-columns: repeat(2, 1fr); padding: 28px 20px; }
+
+      footer { padding: 44px 20px 20px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-logo { grid-column: 1 / -1; }
+
+      .reviews-summary { flex-direction: column; align-items: flex-start; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ANNOUNCEMENT BAR
+  ══════════════════════════════════════════════════════════ -->
+  <div class="announcement">Free Delivery on Orders Over R750</div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════════════════════════ -->
+  <nav class="nav">
+    <a href="index.html">
+      <img class="nav-logo" src="WhatsApp Image 2026-06-23 at 3.47.08 PM.jpeg" alt="LNK Creatives — Skin &amp; Body Care">
+    </a>
+
+    <div class="nav-links">
+      <a href="#" class="active">SHOP</a>
+      <a href="#">COLLECTIONS</a>
+      <a href="#">ABOUT</a>
+      <a href="#">BLOG</a>
+      <a href="#">CONTACT</a>
+    </div>
+
+    <div class="nav-icons">
+      <button class="icon-btn" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Account">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </button>
+      <button class="icon-btn cart-wrap" aria-label="Cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 016 0"/></svg>
+        <span class="cart-badge" id="cartCount" aria-hidden="true">0</span>
+      </button>
+      <button class="hamburger" aria-label="Open menu" onclick="document.getElementById('mobileNav').classList.add('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MOBILE DRAWER
+  ══════════════════════════════════════════════════════════ -->
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <div class="mobile-nav-top">
+      <img class="mobile-nav-logo" src="WhatsApp Image 2026-06-23 at 3.47.08 PM.jpeg" alt="LNK Creatives">
+      <button class="mobile-close" aria-label="Close menu" onclick="document.getElementById('mobileNav').classList.remove('open')">&times;</button>
+    </div>
+    <a href="#">SHOP</a>
+    <a href="#">COLLECTIONS</a>
+    <a href="#">ABOUT</a>
+    <a href="#">BLOG</a>
+    <a href="#">CONTACT</a>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════
+       BREADCRUMB
+  ══════════════════════════════════════════════════════════ -->
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="sep">/</span>
+    <a href="#">Body Care</a>
+    <span class="sep">/</span>
+    <span class="current">Whipped Body Butter</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PRODUCT SECTION
+  ══════════════════════════════════════════════════════════ -->
+  <section class="product-section">
+
+    <!-- ── IMAGE GALLERY ── -->
+    <div class="product-gallery">
+      <div class="gallery-main" id="mainImage">
+        <img src="Whipped Body Butter.png" alt="Whipped Body Butter" id="mainImg">
+      </div>
+      <div class="gallery-thumbs">
+        <div class="thumb active" onclick="switchImage('Whipped Body Butter.png', this)">
+          <img src="Whipped Body Butter.png" alt="Whipped Body Butter">
+        </div>
+        <div class="thumb" onclick="switchImage('product on tray.png', this)">
+          <img src="product on tray.png" alt="Product display">
+        </div>
+        <div class="thumb" onclick="switchImage('body care.png', this)">
+          <img src="body care.png" alt="Body care">
+        </div>
+        <div class="thumb" onclick="switchImage('Rooted in nature inspired by you.png', this)">
+          <img src="Rooted in nature inspired by you.png" alt="Natural ingredients">
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PRODUCT INFO ── -->
+    <div class="product-info">
+      <span class="product-badge">BEST SELLER</span>
+      <h1 class="product-name">Whipped Body<br>Butter</h1>
+      <div class="product-tagline">For skin that glows.</div>
+
+      <div class="product-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-count">4.9 · <a href="#reviews">148 reviews</a></span>
+      </div>
+
+      <div class="product-price">R260.00</div>
+      <div class="product-compare">
+        <s>R320.00</s>
+        <span class="save-tag">SAVE R60</span>
+      </div>
+
+      <div class="product-divider"></div>
+
+      <p class="product-desc">
+        Our luxuriously rich Whipped Body Butter melts into skin on contact, delivering deep moisture that lasts all day. Blended with Shea, Mango and Cocoa Butter and infused with natural plant oils, it leaves your skin feeling velvety soft, nourished and delicately scented.
+      </p>
+
+      <!-- Size selector -->
+      <div class="selector-label">SIZE</div>
+      <div class="size-options">
+        <button class="size-btn active" onclick="selectSize(this)">150ml</button>
+        <button class="size-btn" onclick="selectSize(this)">250ml</button>
+        <button class="size-btn" onclick="selectSize(this)">500ml</button>
+      </div>
+
+      <!-- Scent selector -->
+      <div class="selector-label">SCENT — <span style="font-weight:400;color:var(--text-muted)">Vanilla Coconut</span></div>
+      <div class="scent-options">
+        <button class="scent-btn active" onclick="selectScent(this, 'Vanilla Coconut')">Vanilla Coconut</button>
+        <button class="scent-btn" onclick="selectScent(this, 'Rose & Shea')">Rose &amp; Shea</button>
+        <button class="scent-btn" onclick="selectScent(this, 'Lavender Calm')">Lavender Calm</button>
+        <button class="scent-btn" onclick="selectScent(this, 'Unscented')">Unscented</button>
+      </div>
+
+      <!-- Qty + Add to Cart -->
+      <div class="add-to-cart-row">
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(-1)" aria-label="Decrease quantity">−</button>
+          <input class="qty-input" id="qty" type="number" value="1" min="1" max="99" aria-label="Quantity">
+          <button class="qty-btn" onclick="changeQty(1)" aria-label="Increase quantity">+</button>
+        </div>
+        <button class="btn-add-cart" onclick="addToCart()">ADD TO CART</button>
+      </div>
+
+      <button class="btn-wishlist" onclick="toggleWishlist(this)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" id="wishIcon"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span id="wishText">ADD TO WISHLIST</span>
+      </button>
+
+      <!-- Trust badges -->
+      <div class="trust-badges">
+        <div class="trust-item"><div class="trust-icon">❧</div>Natural</div>
+        <div class="trust-item"><div class="trust-icon">✿</div>Handmade</div>
+        <div class="trust-item"><div class="trust-icon">❀</div>Cruelty Free</div>
+        <div class="trust-item"><div class="trust-icon">♻</div>Sustainable</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PRODUCT TABS
+  ══════════════════════════════════════════════════════════ -->
+  <div class="product-tabs-section">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="switchTab('description', this)">DESCRIPTION</button>
+      <button class="tab-btn" onclick="switchTab('ingredients', this)">INGREDIENTS</button>
+      <button class="tab-btn" onclick="switchTab('how-to-use', this)">HOW TO USE</button>
+      <button class="tab-btn" onclick="switchTab('reviews', this)" id="reviewsTabBtn">REVIEWS (148)</button>
+    </div>
+
+    <div class="tabs-content">
+
+      <!-- DESCRIPTION -->
+      <div class="tab-panel active" id="tab-description">
+        <h4>About this product</h4>
+        <p>
+          The LNK Creatives Whipped Body Butter is crafted with a nutrient-rich blend of African Shea Butter, Mango Butter and Cocoa Butter to restore moisture and create a protective barrier that keeps your skin soft and supple throughout the day.
+        </p>
+        <p>
+          Unlike heavy creams that sit on the surface, our airy whipped texture absorbs quickly, leaving no greasy residue — just silky, nourished skin from the very first use. Ideal for dry, sensitive or eczema-prone skin.
+        </p>
+        <ul>
+          <li>Intensely moisturises and softens dry skin</li>
+          <li>Absorbs quickly with no greasy residue</li>
+          <li>Soothes and calms sensitive and irritated skin</li>
+          <li>Improves skin elasticity and texture over time</li>
+          <li>Free from parabens, sulphates and artificial dyes</li>
+          <li>Vegan-friendly and cruelty free</li>
+        </ul>
+      </div>
+
+      <!-- INGREDIENTS -->
+      <div class="tab-panel" id="tab-ingredients">
+        <h4>Full Ingredient List</h4>
+        <p>
+          We believe in full transparency. Every ingredient we use is carefully selected for its skin benefit and sourced as sustainably as possible.
+        </p>
+        <ul>
+          <li><strong>Butyrospermum Parkii (Shea Butter)</strong> — deeply moisturises and softens</li>
+          <li><strong>Mangifera Indica (Mango) Seed Butter</strong> — rich in vitamins A &amp; C, improves elasticity</li>
+          <li><strong>Theobroma Cacao (Cocoa) Butter</strong> — creates a protective moisture barrier</li>
+          <li><strong>Helianthus Annuus (Sunflower) Seed Oil</strong> — lightweight, absorbs fast</li>
+          <li><strong>Simmondsia Chinensis (Jojoba) Oil</strong> — balances and soothes</li>
+          <li><strong>Arrowroot Powder</strong> — creates the signature non-greasy finish</li>
+          <li><strong>Natural Fragrance (Vanilla Coconut)</strong></li>
+          <li><strong>Vitamin E (Tocopherol)</strong> — antioxidant, extends shelf life naturally</li>
+        </ul>
+        <p style="font-size:11px;color:var(--text-light);margin-top:12px;">
+          * Always patch test before use. Store in a cool, dry place away from direct sunlight.
+        </p>
+      </div>
+
+      <!-- HOW TO USE -->
+      <div class="tab-panel" id="tab-how-to-use">
+        <h4>How to Use</h4>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <div class="step-title">SHOWER OR BATHE</div>
+              <div class="step-desc">Cleanse your skin with warm water to open pores and prepare for maximum absorption.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <div class="step-title">PAT DRY</div>
+              <div class="step-desc">Gently pat skin until slightly damp — applying to damp skin locks in extra moisture.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <div class="step-title">SCOOP &amp; WARM</div>
+              <div class="step-desc">Take a small amount and warm between your palms until it melts into a silky oil.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text">
+              <div class="step-title">MASSAGE IN</div>
+              <div class="step-desc">Apply using circular, upward strokes across your body, paying extra attention to elbows, knees and heels.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-text">
+              <div class="step-title">ENJOY YOUR GLOW</div>
+              <div class="step-desc">Use daily morning and evening for best results. A little goes a long way.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVIEWS -->
+      <div class="tab-panel" id="tab-reviews">
+        <div class="reviews-summary">
+          <div class="rating-big">
+            <div class="num">4.9</div>
+            <div class="stars-big">★★★★★</div>
+            <div class="total">148 reviews</div>
+          </div>
+          <div class="rating-bars">
+            <div class="bar-row">
+              <span class="bar-label">5 ★</span>
+              <div class="bar-track"><div class="bar-fill" style="width:88%"></div></div>
+              <span class="bar-count">130</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">4 ★</span>
+              <div class="bar-track"><div class="bar-fill" style="width:9%"></div></div>
+              <span class="bar-count">13</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">3 ★</span>
+              <div class="bar-track"><div class="bar-fill" style="width:3%"></div></div>
+              <span class="bar-count">4</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">2 ★</span>
+              <div class="bar-track"><div class="bar-fill" style="width:1%"></div></div>
+              <span class="bar-count">1</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-label">1 ★</span>
+              <div class="bar-track"><div class="bar-fill" style="width:0%"></div></div>
+              <span class="bar-count">0</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-cards" id="reviews">
+          <div class="review-card">
+            <div class="review-header">
+              <span class="reviewer-name">Nomsa P.</span>
+              <span class="review-date">June 2026</span>
+            </div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"My skin has never felt this soft and nourished. I love knowing it's natural and made with care. I've been through three jars already and I can't imagine my routine without it!"</p>
+            <span class="verified-tag">✓ VERIFIED PURCHASE</span>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <span class="reviewer-name">Thandi M.</span>
+              <span class="review-date">May 2026</span>
+            </div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"I have very dry skin and this is the only body butter that keeps me moisturised all day without that heavy, greasy feeling. The Vanilla Coconut scent is divine — so subtle and beautiful."</p>
+            <span class="verified-tag">✓ VERIFIED PURCHASE</span>
+          </div>
+          <div class="review-card">
+            <div class="review-header">
+              <span class="reviewer-name">Kefilwe D.</span>
+              <span class="review-date">April 2026</span>
+            </div>
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"I gifted this to my mom and she's obsessed! She says her skin looks younger and more radiant. We're both LNK customers for life now. Absolutely beautiful product."</p>
+            <span class="verified-tag">✓ VERIFIED PURCHASE</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       YOU MAY ALSO LIKE
+  ══════════════════════════════════════════════════════════ -->
+  <section class="related">
+    <h3>You May Also Like</h3>
+    <div class="products-grid">
+      <div class="prod-card">
+        <div class="prod-img"><img src="Exfoliating Body Scrub.png" alt="Exfoliating Body Scrub"></div>
+        <div class="prod-name">Exfoliating Body Scrub</div>
+        <div class="prod-price">R240.00</div>
+        <button class="btn prod-btn" onclick="addToCartQuick('Exfoliating Body Scrub', 'R240.00')">ADD TO CART</button>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img"><img src="Nourishing Body Oil.png" alt="Nourishing Body Oil"></div>
+        <div class="prod-name">Nourishing Body Oil</div>
+        <div class="prod-price">R220.00</div>
+        <button class="btn prod-btn" onclick="addToCartQuick('Nourishing Body Oil', 'R220.00')">ADD TO CART</button>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img"><img src="Radiance Face Serum.png" alt="Radiance Face Serum"></div>
+        <div class="prod-name">Radiance Face Serum</div>
+        <div class="prod-price">R280.00</div>
+        <button class="btn prod-btn" onclick="addToCartQuick('Radiance Face Serum', 'R280.00')">ADD TO CART</button>
+      </div>
+      <div class="prod-card">
+        <div class="prod-img"><img src="Gift Sets.png" alt="Nourish &amp; Glow Gift Set"></div>
+        <div class="prod-name">Nourish &amp; Glow Gift Set</div>
+        <div class="prod-price">R620.00</div>
+        <button class="btn prod-btn" onclick="addToCartQuick('Nourish & Glow Gift Set', 'R620.00')">ADD TO CART</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PROMISE STRIP
+  ══════════════════════════════════════════════════════════ -->
+  <div class="promises">
+    <div class="promise-item">
+      <div class="promise-icon">✓</div>
+      <div><div class="promise-title">QUALITY</div><div class="promise-sub">You Can Trust</div></div>
+    </div>
+    <div class="promise-item">
+      <div class="promise-icon">✿</div>
+      <div><div class="promise-title">MADE WITH</div><div class="promise-sub">Natural Ingredients</div></div>
+    </div>
+    <div class="promise-item">
+      <div class="promise-icon">♡</div>
+      <div><div class="promise-title">LOVE IT</div><div class="promise-sub">Or Your Money Back</div></div>
+    </div>
+    <div class="promise-item">
+      <div class="promise-icon">☻</div>
+      <div><div class="promise-title">SUPPORT</div><div class="promise-sub">We're Here For You</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-grid">
+
+      <div class="footer-logo">
+        <a href="index.html">
+          <svg viewBox="0 0 230 108" xmlns="http://www.w3.org/2000/svg" aria-label="LNK Creatives — Skin &amp; Body Care" style="height:92px;width:auto">
+            <line x1="68" y1="4" x2="68" y2="74" stroke="white" stroke-width="1.2"/>
+            <text x="78" y="52" font-family="Georgia,'Playfair Display',serif" font-size="46" font-weight="700" fill="white" letter-spacing="-1">LNK</text>
+            <text x="78" y="72" font-family="Georgia,serif" font-size="20" font-style="italic" fill="white" opacity="0.92">Creatives</text>
+            <line x1="0" y1="82" x2="228" y2="82" stroke="rgba(255,255,255,0.35)" stroke-width="0.8"/>
+            <text x="114" y="98" font-family="'Montserrat',Arial,sans-serif" font-size="9" fill="white" letter-spacing="3.5" text-anchor="middle" opacity="0.80">SKIN &amp; BODY CARE</text>
+          </svg>
+        </a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-head">SHOP</div>
+        <a href="#">All Products</a>
+        <a href="#">Body Care</a>
+        <a href="#">Skin Care</a>
+        <a href="#">Gift Sets</a>
+        <a href="#">Wellness</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-head">COMPANY</div>
+        <a href="#">About Us</a>
+        <a href="#">Our Ingredients</a>
+        <a href="#">Sustainability</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact Us</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-head">HELP</div>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">FAQ</a>
+        <a href="#">Terms &amp; Conditions</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-head">CONNECT</div>
+        <div class="socials">
+          <div class="social-icon" title="Facebook">f</div>
+          <div class="social-icon" title="Instagram">◎</div>
+          <div class="social-icon" title="LinkedIn">in</div>
+          <div class="social-icon" title="TikTok">♪</div>
+        </div>
+        <span class="flink">hello@lnkcreatives.co.za</span>
+        <span class="flink">+27 71 123 4567</span>
+      </div>
+
+    </div>
+    <div class="footer-bottom">© 2026 LNK Creatives. All rights reserved.</div>
+  </footer>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* Gallery */
+    function switchImage(src, thumb) {
+      document.getElementById('mainImg').src = src;
+      document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+      thumb.classList.add('active');
+    }
+
+    /* Size selector */
+    function selectSize(btn) {
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    /* Scent selector */
+    function selectScent(btn, name) {
+      document.querySelectorAll('.scent-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelector('.selector-label span').textContent = name;
+    }
+
+    /* Quantity */
+    function changeQty(delta) {
+      const input = document.getElementById('qty');
+      const newVal = Math.max(1, parseInt(input.value || 1) + delta);
+      input.value = newVal;
+    }
+
+    /* Cart count */
+    let cartCount = 0;
+    function updateCartBadge() {
+      const badge = document.getElementById('cartCount');
+      badge.textContent = cartCount;
+      badge.style.display = cartCount > 0 ? 'flex' : 'none';
+    }
+
+    /* Add to Cart */
+    function addToCart() {
+      const qty = parseInt(document.getElementById('qty').value) || 1;
+      const size = document.querySelector('.size-btn.active').textContent;
+      const scent = document.querySelector('.scent-btn.active').textContent;
+      cartCount += qty;
+      updateCartBadge();
+      showToast(`Added ${qty}× Whipped Body Butter (${size}, ${scent}) to cart`);
+    }
+
+    function addToCartQuick(name, price) {
+      cartCount += 1;
+      updateCartBadge();
+      showToast(`Added ${name} to cart`);
+    }
+
+    /* Toast */
+    let toastTimer;
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+    }
+
+    /* Wishlist */
+    let wished = false;
+    function toggleWishlist(btn) {
+      wished = !wished;
+      const icon = document.getElementById('wishIcon');
+      const text = document.getElementById('wishText');
+      if (wished) {
+        icon.setAttribute('fill', 'currentColor');
+        btn.style.color = 'var(--teal)';
+        btn.style.borderColor = 'var(--teal)';
+        text.textContent = 'SAVED TO WISHLIST';
+        showToast('Added to your wishlist');
+      } else {
+        icon.setAttribute('fill', 'none');
+        btn.style.color = '';
+        btn.style.borderColor = '';
+        text.textContent = 'ADD TO WISHLIST';
+      }
+    }
+
+    /* Tabs */
+    function switchTab(id, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    /* Deep-link from rating count anchor */
+    document.querySelector('a[href="#reviews"]').addEventListener('click', function(e) {
+      e.preventDefault();
+      switchTab('reviews', document.getElementById('reviewsTabBtn'));
+      document.querySelector('.product-tabs-section').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    /* Init cart badge */
+    updateCartBadge();
+  </script>
+
+</body>
+</html>
